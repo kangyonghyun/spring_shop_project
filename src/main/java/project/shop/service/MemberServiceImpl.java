@@ -7,21 +7,36 @@ import project.shop.domain.member.Member;
 import project.shop.repository.MemberRepository;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     @Override
     public Long join(Member member) {
         //member validation 체크 구현 후
         validateDuplicateMember(member);
         //저장
         return memberRepository.save(member);
+    }
+
+    @Transactional
+    @Override
+    public void update(Long id, String password, String city, String street, String zipcode) {
+        Member findMember = memberRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        findMember.updateMember(password, city, street, zipcode);
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public void delete(Member member) {
+        memberRepository.delete(member);
     }
 
     private void validateDuplicateMember(Member member) {
@@ -50,4 +65,5 @@ public class MemberServiceImpl implements MemberService {
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
+
 }

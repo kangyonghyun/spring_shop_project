@@ -43,4 +43,13 @@ public class Member {
         return this.loginId == loginId;
     }
 
+    public void updateMember(String password, String city, String street, String zipcode) {
+        this.password = password;
+        Address address = new Address(city, street, zipcode);
+        this.address = address;
+    }
+
+    public void deleteMember() {
+
+    }
 }

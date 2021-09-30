@@ -37,4 +37,22 @@ class MemberServiceImplTest {
         assertThrows(IllegalStateException.class, () -> memberService.join(member2));
     }
 
+    @Test
+    void member_update() {
+        Member member = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        memberService.join(member);
+        memberService.update(member.getId(), "test!!", "2222", "3333", "4444");
+        Member updatedMember = memberService.findOneById(member.getId()).orElse(null);
+        assertThat(updatedMember.getPassword()).isEqualTo("test!!");
+    }
+
+    @Test
+    void member_delete() {
+        Member member = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        memberService.join(member);
+        memberService.delete(member);
+
+        assertThat(memberService.findMembers().size()).isEqualTo(0);
+    }
+
 }

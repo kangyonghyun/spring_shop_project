@@ -22,6 +22,11 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
+    public void delete(Member member) {
+        em.remove(member);
+    }
+
+    @Override
     public Optional<Member> findById(Long id) {
         Member member = em.find(Member.class, id);
         return Optional.ofNullable(member);

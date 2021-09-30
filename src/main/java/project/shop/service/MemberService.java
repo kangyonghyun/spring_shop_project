@@ -9,6 +9,10 @@ public interface MemberService {
 
     Long join(Member member);
 
+    void update(Long id, String password, String city, String street, String zipcode);
+
+    void delete(Member member);
+
     Optional<Member> findOneById(Long id);
 
     Optional<Member> findOneByLoginId(String loginId);
