@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import project.shop.domain.address.Address;
 import project.shop.domain.member.Member;
 
 import java.util.List;
@@ -26,7 +27,8 @@ class MemberRepositoryImplTest {
 
     @BeforeEach
     void setUp() {
-        createMember = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        Address address = new Address("11", "22", "33");
+        createMember = Member.createMember("memberId", "test!", "kang", address);
         saveId = memberRepository.save(createMember);
     }
 

@@ -31,25 +31,16 @@ public class Member {
     }
 
     public static Member createMember(String loginId, String password, String name,
-                               String city, String street, String zipcode) {
-
-        Address address = new Address(city, street, zipcode);
-        Member member = new Member(loginId, password, name, address);
-
-        return member;
+                               Address address) {
+        return new Member(loginId, password, name, address);
     }
 
     public boolean isEqualLoginId(String loginId) {
-        return this.loginId == loginId;
+        return this.loginId.equals(loginId);
     }
 
     public void updateMember(String password, String city, String street, String zipcode) {
         this.password = password;
-        Address address = new Address(city, street, zipcode);
-        this.address = address;
-    }
-
-    public void deleteMember() {
-
+        this.address = new Address(city, street, zipcode);
     }
 }

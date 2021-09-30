@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import project.shop.domain.address.Address;
 import project.shop.domain.member.Member;
 import project.shop.repository.MemberRepository;
 
@@ -23,7 +24,8 @@ class MemberServiceImplTest {
 
     @Test
     void join() {
-        Member member = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        Address address = new Address("11", "22", "33");
+        Member member = Member.createMember("memberId", "test!", "kang", address);
         Long saveId = memberService.join(member);
         Member findMember = memberRepository.findById(saveId).orElse(null);
         assertThat(member).isEqualTo(findMember);
@@ -31,15 +33,17 @@ class MemberServiceImplTest {
 
     @Test
     void member_validation() {
-        Member member1 = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
-        Member member2 = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        Address address = new Address("11", "22", "33");
+        Member member1 = Member.createMember("memberId", "test!", "kang", address);
+        Member member2 = Member.createMember("memberId", "test!", "kang", address);
         memberService.join(member1);
         assertThrows(IllegalStateException.class, () -> memberService.join(member2));
     }
 
     @Test
     void member_update() {
-        Member member = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        Address address = new Address("11", "22", "33");
+        Member member = Member.createMember("memberId", "test!", "kang", address);
         memberService.join(member);
         memberService.update(member.getId(), "test!!", "2222", "3333", "4444");
         Member updatedMember = memberService.findOneById(member.getId()).orElse(null);
@@ -48,7 +52,8 @@ class MemberServiceImplTest {
 
     @Test
     void member_delete() {
-        Member member = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        Address address = new Address("11", "22", "33");
+        Member member = Member.createMember("memberId", "test!", "kang", address);
         memberService.join(member);
         memberService.delete(member);
 
