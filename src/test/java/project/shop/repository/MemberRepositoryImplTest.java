@@ -21,20 +21,20 @@ class MemberRepositoryImplTest {
     @Autowired
     MemberRepository memberRepository;
 
-    Member saveMember;
+    Member createMember;
     Long saveId;
 
     @BeforeEach
     void setUp() {
-        saveMember = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
-        saveId = memberRepository.save(saveMember);
+        createMember = Member.createMember("memberId", "test!", "kang", "11", "22", "33");
+        saveId = memberRepository.save(createMember);
     }
 
     @Test
     void 회원가입() {
         Optional<Member> opMember = memberRepository.findById(saveId);
         Member findMember = opMember.orElse(null);
-        assertThat(saveMember).isEqualTo(findMember);
+        assertThat(createMember).isEqualTo(findMember);
     }
 
     @Test
