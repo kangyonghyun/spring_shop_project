@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import project.shop.domain.address.Address;
 import project.shop.domain.member.Member;
 import project.shop.repository.MemberRepository;
@@ -15,6 +12,7 @@ import project.shop.repository.MemberRepositoryQuery;
 import project.shop.service.MemberService;
 import project.shop.web.dto.MemberListForm;
 import project.shop.web.dto.MemberSaveForm;
+import project.shop.web.dto.MemberUpdateForm;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -52,4 +50,20 @@ public class MemberController {
         return "members/memberList";
     }
 
+    @GetMapping("/{id}/edit")
+    public String updateForm(@PathVariable Long id, Model model) {
+        Member member = memberService.findOneById(id).orElse(null);
+        Address address = member.getAddress();
+        MemberUpdateForm memberUpdateForm = new MemberUpdateForm(member.getLoginId(), member.getPassword(), member.getName(), address.getCity(), address.getStreet(), address.getZipcode());
+        model.addAttribute("member", memberUpdateForm);
+        return "members/updateMemberForm";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String update(@PathVariable Long id
+            , @Valid @ModelAttribute("member") MemberUpdateForm memberUpdateForm, BindingResult bindingResult) {
+        Member member = memberService.findOneById(id).orElse(null);
+        memberService.update(id, memberUpdateForm.getPassword(), memberUpdateForm.getCity(), memberUpdateForm.getStreet(), memberUpdateForm.getZipcode());
+        return "redirect:/members";
+    }
 }
