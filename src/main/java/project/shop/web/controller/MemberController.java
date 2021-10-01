@@ -66,4 +66,11 @@ public class MemberController {
         memberService.update(id, memberUpdateForm.getPassword(), memberUpdateForm.getCity(), memberUpdateForm.getStreet(), memberUpdateForm.getZipcode());
         return "redirect:/members";
     }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        Member member = memberService.findOneById(id).orElse(null);
+        memberService.delete(member);
+        return "redirect:/members";
+    }
 }
