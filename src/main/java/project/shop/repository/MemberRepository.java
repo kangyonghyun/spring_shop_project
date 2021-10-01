@@ -1,6 +1,6 @@
 package project.shop.repository;
 
-import project.shop.domain.member.Member;
+import project.shop.domain.Member;
 
 import java.util.List;
 import java.util.Optional;

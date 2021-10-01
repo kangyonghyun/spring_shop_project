@@ -5,9 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.shop.domain.address.Address;
-import project.shop.domain.member.Member;
-import project.shop.repository.MemberRepository;
+import project.shop.domain.Address;
+import project.shop.domain.Member;
 import project.shop.repository.MemberRepositoryQuery;
 import project.shop.service.MemberService;
 import project.shop.web.dto.MemberListForm;
@@ -16,7 +15,6 @@ import project.shop.web.dto.MemberUpdateForm;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor

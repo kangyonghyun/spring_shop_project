@@ -1,12 +1,11 @@
 package project.shop.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import project.shop.domain.address.Address;
-import project.shop.domain.member.Member;
+import project.shop.domain.Address;
+import project.shop.domain.Member;
 import project.shop.repository.MemberRepository;
 
 import static org.assertj.core.api.Assertions.*;
@@ -57,7 +56,7 @@ class MemberServiceImplTest {
         memberService.join(member);
         memberService.delete(member);
 
-        assertThat(memberService.findMembers().size()).isEqualTo(0);
+        assertThat(memberService.findMembers().size()).isEqualTo(2);
     }
 
 }

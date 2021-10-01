@@ -1,9 +1,7 @@
 package project.shop.web.dto;
 
 import lombok.Getter;
-import project.shop.domain.address.Address;
-
-import javax.validation.constraints.NotEmpty;
+import project.shop.domain.Address;
 
 @Getter
 public class MemberListForm {

@@ -1,11 +1,11 @@
-package project.shop.domain.member;
+package project.shop.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.shop.domain.address.Address;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,16 +23,14 @@ public class Member {
     @Embedded
     private Address address;
 
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders;
+
     public Member(String loginId, String password, String name, Address address) {
         this.loginId = loginId;
         this.password = password;
         this.name = name;
         this.address = address;
-    }
-
-    public static Member createMember(String loginId, String password, String name,
-                               Address address) {
-        return new Member(loginId, password, name, address);
     }
 
     public boolean isEqualLoginId(String loginId) {
@@ -43,4 +41,10 @@ public class Member {
         this.password = password;
         this.address = new Address(city, street, zipcode);
     }
+
+    public static Member createMember(String loginId, String password, String name,
+                                      Address address) {
+        return new Member(loginId, password, name, address);
+    }
+
 }

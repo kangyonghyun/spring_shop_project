@@ -2,7 +2,6 @@ package project.shop.web.dto;
 
 
 import lombok.Getter;
-import project.shop.domain.address.Address;
 
 @Getter
 public class MemberUpdateForm {

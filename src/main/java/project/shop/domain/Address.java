@@ -1,4 +1,4 @@
-package project.shop.domain.address;
+package project.shop.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;

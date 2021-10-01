@@ -2,10 +2,9 @@ package project.shop.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import project.shop.domain.member.Member;
+import project.shop.domain.Member;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

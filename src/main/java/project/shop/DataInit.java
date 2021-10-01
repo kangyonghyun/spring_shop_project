@@ -3,9 +3,8 @@ package project.shop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.shop.domain.address.Address;
-import project.shop.domain.member.Member;
-import project.shop.service.MemberService;
+import project.shop.domain.Address;
+import project.shop.domain.Member;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;

@@ -1,19 +1,17 @@
 package project.shop.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import project.shop.domain.address.Address;
-import project.shop.domain.member.Member;
+import project.shop.domain.Address;
+import project.shop.domain.Member;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -50,7 +48,7 @@ class MemberRepositoryImplTest {
     @Test
     void 검색_모든_회원() {
         List<Member> members = memberRepository.findAll();
-        assertThat(members.size()).isEqualTo(1);
+        assertThat(members.size()).isEqualTo(3);
     }
 
     @Test
