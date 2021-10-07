@@ -1,4 +1,4 @@
-package project.shop.repository;
+package project.shop.repository.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

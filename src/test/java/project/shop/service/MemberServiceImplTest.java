@@ -6,7 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.shop.domain.Address;
 import project.shop.domain.Member;
-import project.shop.repository.MemberRepository;
+import project.shop.repository.member.MemberRepository;
+import project.shop.service.member.MemberService;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;

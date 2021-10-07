@@ -1,10 +1,10 @@
-package project.shop.service;
+package project.shop.service.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.shop.domain.Member;
-import project.shop.repository.MemberRepository;
+import project.shop.repository.member.MemberRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;

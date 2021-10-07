@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th th:text="#{label.item.id}">ID</th>
+                <th th:text="#{label.item.itemName}">상품명</th>
+                <th th:text="#{label.item.price}" >가격</th>
+                <th th:text="#{label.item.quantity}">재고수량</th>
+<!--                <th>author</th>-->
+<!--                <th>ISBN</th>-->
+<!--                <th>director</th>-->
+<!--                <th>actor</th>-->
+<!--                <th>artist</th>-->
+<!--                <th>etc</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td><a href="#" th:href="@{/items/{id} (id=${item.id})}" th:text="${item.id}"></a></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.stockQuantity}"></td>
+<!--                <td th:text="${item.author}"></td>-->
+<!--                <td th:text="${item.isbn}"></td>-->
+<!--                <td th:text="${item.director}"></td>-->
+<!--                <td th:text="${item.actor}"></td>-->
+<!--                <td th:text="${item.artist}"></td>-->
+<!--                <td th:text="${item.etc}"></td>-->
+                <td>
+                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"
+                       class="btn btn-primary" role="button" th:text="#{button.update}">수정</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

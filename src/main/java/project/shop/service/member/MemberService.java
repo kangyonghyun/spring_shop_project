@@ -1,4 +1,4 @@
-package project.shop.service;
+package project.shop.service.member;
 
 import project.shop.domain.Member;
 
