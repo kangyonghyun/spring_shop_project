@@ -1,12 +1,13 @@
 package project.shop.web.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 import project.shop.domain.item.ItemType;
 
 import java.util.List;
 
-@Getter
+@Getter @Setter
 public class ItemSaveForm {
 
     private String name;

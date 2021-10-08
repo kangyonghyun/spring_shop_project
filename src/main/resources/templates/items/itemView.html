@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div class="py-5 text-center">
+        <h2>상품 조회</h2>
+    </div>
+
+    <label>상품명 : </label>
+    <span th:text="${item.name}">상품명</span><br/>
+
+    <label>가격 : </label>
+    <span th:text="${item.price}">가격</span><br/>
+
+    <label>재고 : </label>
+    <span th:text="${item.stockQuantity}">재고</span><br/>
+
+<!--    <label>저자 : </label>-->
+<!--    <span th:text="${item.author}">저자</span><br/>-->
+
+<!--    <label>isbn : </label>-->
+<!--    <span th:text="${item.isbn}">isbn</span><br/>-->
+
+    <label>판매여부 : </label>
+    <span th:text="${item.open}">판매여부</span><br/>
+
+    <label>종류 : </label>
+    <span th:text="${item.itemType}">종류</span><br/>
+
+<!--    <label>배송 방식 : </label>-->
+<!--    <span th:text="${item.deliveryCode}">판매여부</span><br/>-->
+
+    <label>첨부파일 : </label>
+    <a th:if="${item.attachFile}" th:href="|/attach/${item.id}|" th:text="${item.getAttachFile().getUploadFileName()}" /><br/>
+    <img th:each="imageFile : ${files}" th:src="|/images/${imageFile.getStoreFileName()}|" width="300" height="300"/>
+
+
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>
