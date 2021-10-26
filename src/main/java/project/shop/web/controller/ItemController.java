@@ -70,8 +70,21 @@ public class ItemController {
             List<UploadFile> files = (List<UploadFile>) inputFlashMap.get("files");
             model.addAttribute("files", files);
         }
-
         return "items/itemView";
+    }
+
+    @GetMapping("/items/{id}/edit")
+    public String item(@PathVariable Long id, Model model) {
+        Item item = itemService.findOne(id).orElseThrow();
+        ItemViewForm itemViewForm = ItemViewForm.createForm(item.getId(), item.getName(), item.getPrice(), item.getStockQuantity(), item.isOpen(), item.getItemType(), item.getAttachFile());
+        model.addAttribute("item", itemViewForm);
+        return "items/updateItem";
+    }
+
+    @PostMapping("/items/{id}/edit")
+    public String item(@PathVariable Long id, ItemViewForm itemViewForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        itemService.updateItem(id, itemViewForm.getName(), itemViewForm.getPrice(), itemViewForm.getStockQuantity(), itemViewForm.getItemType(), itemViewForm.getAttachFile());
+        return "redirect:/items";
     }
 
     @GetMapping("/items")

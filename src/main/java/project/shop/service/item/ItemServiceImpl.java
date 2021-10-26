@@ -3,7 +3,9 @@ package project.shop.service.item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.shop.domain.UploadFile;
 import project.shop.domain.item.Item;
+import project.shop.domain.item.ItemType;
 import project.shop.repository.item.ItemRepository;
 
 import java.util.List;
@@ -35,6 +37,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> findItems() {
         return itemRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity, ItemType itemType, UploadFile attachFile) {
+        Item item = itemRepository.findById(itemId).orElseThrow();
+        item.update(name, price, stockQuantity, itemType, attachFile);
     }
 
 

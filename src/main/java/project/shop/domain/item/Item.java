@@ -53,4 +53,11 @@ public class Item {
         return new Item(name, price, stockQuantity, open, itemType, attachFile, imageFiles);
     }
 
+    public void update(String name, int price, int stockQuantity, ItemType itemType, UploadFile attachFile) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.itemType = itemType;
+        this.attachFile = attachFile;
+    }
 }

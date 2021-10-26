@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.shop.domain.item.Item;
+import project.shop.domain.item.ItemType;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ class ItemRepositoryImplTest {
 
     @BeforeEach
     void init() {
-//        item = Item.createItem("item", 3000, 10);
+        item = Item.createItem("item", 3000, 10, true, ItemType.ETC, null, "ss");
         itemId = itemRepository.save(item);
     }
 
