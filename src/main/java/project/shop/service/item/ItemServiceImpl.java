@@ -46,5 +46,12 @@ public class ItemServiceImpl implements ItemService {
         item.update(name, price, stockQuantity, itemType, attachFile);
     }
 
+    @Override
+    @Transactional
+    public void deleteItem(Long id) {
+        Item item = itemRepository.findById(id).orElseThrow();
+        itemRepository.delete(item);
+    }
+
 
 }

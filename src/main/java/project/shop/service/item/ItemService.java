@@ -19,4 +19,6 @@ public interface ItemService {
 
     void updateItem(Long id, String name, int price, int stockQuantity, ItemType itemType, UploadFile attachFile);
 
+    void deleteItem(Long id);
+
 }

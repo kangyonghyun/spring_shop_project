@@ -40,4 +40,9 @@ public class ItemRepositoryImpl implements ItemRepository {
                 .getResultList();
     }
 
+    @Override
+    public void delete(Item item) {
+        em.remove(item);
+    }
+
 }

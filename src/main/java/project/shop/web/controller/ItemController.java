@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import project.shop.domain.UploadFile;
@@ -26,20 +23,21 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemController {
 
     private final ItemService itemService;
     private final FileStore fileStore;
 
-    @GetMapping("/items/add")
-    public String createForm(Model model) {
+    @GetMapping("/add")
+    public String createItemForm(Model model) {
         model.addAttribute("itemSaveForm", new ItemSaveForm());
         return "items/createItem";
     }
 
-    @PostMapping("/items/add")
-    public String create(@Valid @ModelAttribute ItemSaveForm itemSaveForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
+    @PostMapping("/add")
+    public String createItem(@Valid @ModelAttribute ItemSaveForm itemSaveForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
         UploadFile attachFile = fileStore.storeFile(itemSaveForm.getAttachFile());
         List<UploadFile> storeFiles = fileStore.storeFiles(itemSaveForm.getImageFiles());
 
@@ -59,8 +57,8 @@ public class ItemController {
         return "redirect:/items/{itemId}";
     }
 
-    @GetMapping("/items/{id}")
-    public String item(@PathVariable Long id, Model model, HttpServletRequest request) {
+    @GetMapping("/{id}")
+    public String detailItem(@PathVariable Long id, Model model, HttpServletRequest request) {
         Item item = itemService.findOne(id).orElseThrow();
         ItemViewForm itemViewForm = ItemViewForm.createForm(item.getId(), item.getName(), item.getPrice(), item.getStockQuantity(), item.isOpen(), item.getItemType(), item.getAttachFile());
         model.addAttribute("item", itemViewForm);
@@ -73,21 +71,27 @@ public class ItemController {
         return "items/itemView";
     }
 
-    @GetMapping("/items/{id}/edit")
-    public String item(@PathVariable Long id, Model model) {
+    @GetMapping("/{id}/edit")
+    public String updateItemForm(@PathVariable Long id, Model model) {
         Item item = itemService.findOne(id).orElseThrow();
         ItemViewForm itemViewForm = ItemViewForm.createForm(item.getId(), item.getName(), item.getPrice(), item.getStockQuantity(), item.isOpen(), item.getItemType(), item.getAttachFile());
         model.addAttribute("item", itemViewForm);
         return "items/updateItem";
     }
 
-    @PostMapping("/items/{id}/edit")
-    public String item(@PathVariable Long id, ItemViewForm itemViewForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/{id}/edit")
+    public String updateItem(@PathVariable Long id, ItemViewForm itemViewForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         itemService.updateItem(id, itemViewForm.getName(), itemViewForm.getPrice(), itemViewForm.getStockQuantity(), itemViewForm.getItemType(), itemViewForm.getAttachFile());
         return "redirect:/items";
     }
 
-    @GetMapping("/items")
+    @GetMapping("/{id}/delete")
+    public String deleteItem(@PathVariable Long id) {
+        itemService.deleteItem(id);
+        return "redirect:/items";
+    }
+
+    @GetMapping
     public String items(Model model) {
         List<Item> items = itemService.findItems();
         List<ItemViewForm> itemViewForms = new ArrayList<>();
@@ -98,4 +102,5 @@ public class ItemController {
         model.addAttribute("items", itemViewForms);
         return "items/itemList";
     }
+
 }

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.shop.domain.Address;
 import project.shop.domain.Member;
+import project.shop.domain.item.Book;
+import project.shop.domain.item.Item;
+import project.shop.domain.item.ItemType;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -30,14 +33,18 @@ public class DataInit {
 
         public void init1() {
             Address address1 = new Address("SEOUL", "111", "222");
-            Member member1 = new Member("kyh826", "1234", "test", address1);
-            em.persist(member1);
+            Member member = new Member("kyh826", "1234", "test", address1);
+            Item item = Item.createItem("wow", 1000, 200, true, ItemType.ETC, null, null);
+            em.persist(member);
+            em.persist(item);
         }
 
         public void init2() {
             Address address2 = new Address("BUSAN", "333", "444");
-            Member member2 = new Member("hmoon826", "1234", "test", address2);
-            em.persist(member2);
+            Member member = new Member("hmoon826", "1234", "test", address2);
+            Item item = Item.createItem("spring", 2000, 50, true, ItemType.ELECTRONIC, null, null);
+            em.persist(member);
+            em.persist(item);
         }
 
     }
